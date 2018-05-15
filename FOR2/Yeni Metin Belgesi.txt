@@ -1,0 +1,8 @@
+        int anapara = 0,vade = 0;
+        double faiz = 0,odeme; 
+        anapara = Convert.ToInt16(TextBox1.Text);
+        vade = Convert.ToInt16(TextBox2.Text);
+        faiz = (anapara * 8.79 / 100) * (vade / 12);
+        Response.Write("Faiz:"+faiz+"<BR>");
+        odeme = (anapara + faiz) / vade;
+        Response.Write("Aylýk Ödeme:" + odeme + "<BR>");

@@ -1,0 +1,95 @@
+using System.Data;
+using System.Data.SqlClient;
+
+KAYIT
+ SqlConnection bag = new SqlConnection("Data Source=Localhost; Initial Catalog=personel; User Id=sa; password=mmyo;");
+        bag.Open();
+        SqlCommand co = new SqlCommand();
+        co.Connection =bag;
+        String S1, S2, S3;
+        S1 = TextBox1.Text;
+        S2 = TextBox2.Text;
+        S3 = TextBox3.Text;
+        co.CommandText = "INSERT INTO pervt(pertc,ad,soyad)"
+                     + "VALUES (\'" + S1 + "\',\'" + S2 + "\',\'" + S3 + "\')";
+        co.ExecuteNonQuery();
+         bag.Close();
+LÝSTELEME
+SqlConnection bag = new SqlConnection("Data Source=BILLAB01-PC00; Initial Catalog=Hastane; User Id=sa; password=mmyo;");
+        bag.Open();
+        SqlCommand co = new SqlCommand();
+        co.Connection = bag;
+        co.CommandText = "Select * from hastaBilg";
+        SqlDataAdapter ad = new SqlDataAdapter();
+        ad.SelectCommand = co;
+        DataSet ds = new DataSet();
+        ad.Fill(ds, "a");
+        ListBox1.Items.Clear();
+        foreach (DataTable table in ds.Tables)
+            foreach (DataRow kyt in table.Rows)
+                ListBox1.Items.Add(kyt["hastatc"] + " "
+                    + kyt["ad"] + " " + kyt["soyad"] + " " + kyt["hastaligi"]);
+        bag.Close();
+
+ARAMA
+SqlConnection bag = new SqlConnection("Data Source=BILLAB01-PC00; Initial Catalog=Hastane; User Id=sa; password=mmyo;");
+        bag.Open();
+        SqlCommand co = new SqlCommand();
+        co.Connection = bag;
+        String S1;
+        S1 = TextBox1.Text;
+        co.CommandText = "Select * from hastaBilg where hastatc=\'" + S1 + "\' ";
+        SqlDataAdapter ad = new SqlDataAdapter();
+        ad.SelectCommand = co;
+        DataSet ds = new DataSet();
+        ad.Fill(ds, "a");
+        ListBox1.Items.Clear();
+        foreach (DataTable table in ds.Tables)
+            foreach (DataRow kyt in table.Rows)
+                ListBox1.Items.Add(kyt["hastatc"] + " "
+                    + kyt["ad"] + " " + kyt["soyad"] + " " + kyt["hastaligi"]);
+        bag.Close();
+
+SÝLME
+ SqlConnection bag = new SqlConnection("Data Source=BILLAB01-PC00; Initial Catalog=Hastane; User Id=sa; password=mmyo;");
+        bag.Open();
+        SqlCommand co = new SqlCommand();
+        co.Connection = bag;
+        String S1;
+        S1 = TextBox1.Text;
+        co.CommandText = "Delete from hastaBilg where hastatc=\'" + S1 + "\' ";
+        co.ExecuteNonQuery();
+
+        co.CommandText = "Select * from hastaBilg";
+        SqlDataAdapter ad = new SqlDataAdapter();
+        ad.SelectCommand = co;
+        DataSet ds = new DataSet();
+        ad.Fill(ds, "a");
+        ListBox1.Items.Clear();
+        foreach (DataTable table in ds.Tables)
+            foreach (DataRow kyt in table.Rows)
+                ListBox1.Items.Add(kyt["hastatc"] + " "
+                    + kyt["ad"] + " " + kyt["soyad"] + " " + kyt["hastaligi"]);
+        bag.Close();
+GÜNCELLEME
+
+SqlConnection bag = new SqlConnection("Data Source=BILLAB01-PC00; Initial Catalog=Hastane; User Id=sa; password=mmyo;");
+        bag.Open();
+        SqlCommand co = new SqlCommand();
+        co.Connection = bag;
+        String S1;
+        S1 = TextBox1.Text;
+        co.CommandText = "Update hastaBilg set ad = \'" + TextBox2.Text + "\'  where hastatc=\'" + S1 + "\' ";
+        co.ExecuteNonQuery();
+
+        co.CommandText = "Select * from hastaBilg";
+        SqlDataAdapter ad = new SqlDataAdapter();
+        ad.SelectCommand = co;
+        DataSet ds = new DataSet();
+        ad.Fill(ds, "a");
+        ListBox1.Items.Clear();
+        foreach (DataTable table in ds.Tables)
+            foreach (DataRow kyt in table.Rows)
+                ListBox1.Items.Add(kyt["hastatc"] + " "
+                    + kyt["ad"] + " " + kyt["soyad"] + " " + kyt["hastaligi"]);
+        bag.Close();
